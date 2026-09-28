@@ -16,8 +16,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Build
+    - name: build release
+      run: cargo build --verbose --release
+
+    - name: build debug
       run: cargo build --verbose
       
-    - name: Run tests
+    - name: tests
       run: cargo test --verbose
+
+    - name: create release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          target/release/mcstatus-rust.exe
+          target/debug/mcstatus-rust.exe
+          
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
