@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Enter name of tag'
+        required: false
+        default: ''
 
 env:
   CARGO_TERM_COLOR: always
@@ -31,7 +36,8 @@ jobs:
     - name: create release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref_name }}
+        tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
+        allowUpdates: true
         files: |
           target/release/mcstatus-rust.exe
           target/debug/mcstatus-rust.exe
