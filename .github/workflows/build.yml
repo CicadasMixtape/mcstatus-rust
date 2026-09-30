@@ -33,14 +33,19 @@ jobs:
     - name: tests
       run: cargo test --verbose
 
+    - name: copy paste
+      run: |
+        cp target/release/mcstatus-rust.exe mcstatus-release.exe
+        cp target/debug/mcstatus-rust.exe mcstatus-debug.exe
+
     - name: create release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
         allowUpdates: true
         files: |
-          target/release/mcstatus-rust.exe
-          target/debug/mcstatus-rust.exe
+          mcstatus-release.exe
+          mcstatus-debug.exe
           
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
