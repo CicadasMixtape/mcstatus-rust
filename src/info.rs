@@ -1,5 +1,6 @@
 use serde::Deserialize;
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Info {
     online: bool,
@@ -11,12 +12,14 @@ pub struct Info {
     motd: Motd
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Version {
     pub name_clean: String,
     pub protocol: u32,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Players {
     pub online: u32,
@@ -24,12 +27,14 @@ pub struct Players {
     pub list: Vec<Player>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Player {
     pub uuid: String,
     pub name_clean: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Motd {
     pub clean: String,
